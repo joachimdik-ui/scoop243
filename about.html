@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos | scoop243.net</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root { --orange-media: #F37021; }
+        .bg-orange-media { background-color: var(--orange-media); }
+        .text-orange-media { color: var(--orange-media); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <header class="bg-white border-b" style="padding: 0.25cm 0;">
+        <div class="container mx-auto px-4 flex flex-col justify-center items-center">
+            <a href="index.html">
+                <img src="images/votre-logo.png" alt="Logo" class="h-24 md:h-40 lg:h-48 w-auto object-contain">
+            </a>
+            <p class="text-center text-orange-media font-bold text-sm md:text-base italic -mt-1">Au coeur de l'infos</p>
+        </div>
+    </header>
+
+    <nav class="bg-orange-media sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto flex items-center justify-between px-2 md:px-4 gap-4">
+            <ul class="flex overflow-x-auto text-white font-bold uppercase text-[11px] md:text-sm tracking-wide">
+                <li class="whitespace-nowrap"><a href="index.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Accueil</a></li>
+                <li class="whitespace-nowrap"><a href="politique.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Politique</a></li>
+                <li class="whitespace-nowrap"><a href="economie.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Économie</a></li>
+                <li class="whitespace-nowrap"><a href="sports.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Sports</a></li>
+                <li class="whitespace-nowrap"><a href="culture.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Culture</a></li>
+                <li class="whitespace-nowrap"><a href="faits_divers.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Faits divers</a></li>
+                <li class="whitespace-nowrap"><a href="religion.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Religion</a></li>
+            </ul>
+            <form id="search-form" class="hidden md:flex items-center gap-2 ml-auto">
+                <input type="text" id="search-input" placeholder="Rechercher..." class="px-3 py-2 rounded text-black text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+                <button type="submit" class="bg-white text-orange-media px-3 py-2 rounded font-bold text-sm hover:bg-yellow-400 transition"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-2 md:px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <!-- Titre -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">À Propos de Scoop243</h1>
+                <p class="text-lg text-gray-600 italic border-t-4 border-orange-media pt-4 inline-block">Au coeur de l'infos</p>
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 space-y-6 mb-8">
+                <!-- Qui sommes-nous -->
+                <section>
+                    <h2 class="text-2xl font-bold text-orange-media mb-4 flex items-center gap-2">
+                        <i class="fas fa-info-circle"></i> Qui Sommes-nous
+                    </h2>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        SCOOP243 est un site d'informations exclusivement tourné vers l'actualité Congolaise dont la ligne éditoriale est axée sur la politique, santé, sport, culture, religion, les faits divers. Scoop243 a pour ambition de vous informer et divertir.
+                    </p>
+                </section>
+
+                <!-- Notre Mission -->
+                <section>
+                    <h2 class="text-2xl font-bold text-orange-media mb-4 flex items-center gap-2">
+                        <i class="fas fa-target"></i> Notre Mission
+                    </h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        Fournir une information de qualité, vérifiée et indépendante sur les événements politiques, économiques, sportifs et culturels qui façonnent la République Démocratique du Congo et sa communauté de diaspora.
+                    </p>
+                </section>
+
+                <!-- Nos Valeurs -->
+                <section>
+                    <h2 class="text-2xl font-bold text-orange-media mb-4 flex items-center gap-2">
+                        <i class="fas fa-heart"></i> Nos Valeurs
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex gap-3">
+                            <div class="text-orange-media text-2xl"><i class="fas fa-shield-alt"></i></div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-1">Intégrité</h3>
+                                <p class="text-sm text-gray-600">Une information honnête et vérifiée</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="text-orange-media text-2xl"><i class="fas fa-scale-balanced"></i></div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-1">Indépendance</h3>
+                                <p class="text-sm text-gray-600">Libre de toute influence politique</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="text-orange-media text-2xl"><i class="fas fa-people-group"></i></div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-1">Accessibilité</h3>
+                                <p class="text-sm text-gray-600">L'information pour tous</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="text-orange-media text-2xl"><i class="fas fa-check-circle"></i></div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-1">Fiabilité</h3>
+                                <p class="text-sm text-gray-600">Des sources vérifiées et multiples</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Nos Rubriques -->
+                <section>
+                    <h2 class="text-2xl font-bold text-orange-media mb-4 flex items-center gap-2">
+                        <i class="fas fa-newspaper"></i> Nos Rubriques
+                    </h2>
+                    <p class="text-gray-700 mb-4">Nous couvrons l'actualité dans les domaines suivants :</p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center gap-2"><span class="text-orange-media"><i class="fas fa-chevron-right"></i></span> <strong>Politique :</strong> Actualités gouvernementales et parlementaires</li>
+                        <li class="flex items-center gap-2"><span class="text-orange-media"><i class="fas fa-chevron-right"></i></span> <strong>Économie :</strong> Marchés, investissements et développement</li>
+                        <li class="flex items-center gap-2"><span class="text-orange-media"><i class="fas fa-chevron-right"></i></span> <strong>Sports :</strong> Compétitions et réalisations sportives</li>
+                        <li class="flex items-center gap-2"><span class="text-orange-media"><i class="fas fa-chevron-right"></i></span> <strong>Culture :</strong> Arts, musique, cinéma et patrimoine</li>
+                    </ul>
+                </section>
+
+                <!-- Contact -->
+                <section class="bg-orange-media/10 p-4 rounded-lg border-l-4 border-orange-media">
+                    <h2 class="text-2xl font-bold text-orange-media mb-4 flex items-center gap-2">
+                        <i class="fas fa-envelope"></i> Nous Contacter
+                    </h2>
+                    <p class="text-gray-700 mb-4">Avez-vous une question, une suggestion ou un scoop à nous rapporter ?</p>
+                    <a href="contact.html" class="inline-block bg-orange-media text-white px-6 py-2 rounded font-bold hover:bg-orange-600 transition">
+                        Nous Contacter
+                    </a>
+                </section>
+            </div>
+
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-12 py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="font-bold text-orange-media mb-4">À Propos</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="about.html" class="hover:text-orange-media transition">Qui sommes-nous</a></li>
+                        <li><a href="contact.html" class="hover:text-orange-media transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-orange-media mb-4">Rubriques</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="politique.html" class="hover:text-orange-media transition">Politique</a></li>
+                        <li><a href="economie.html" class="hover:text-orange-media transition">Économie</a></li>
+                        <li><a href="sports.html" class="hover:text-orange-media transition">Sports</a></li>
+                        <li><a href="culture.html" class="hover:text-orange-media transition">Culture</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-orange-media mb-4">Légal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="conditions.html" class="hover:text-orange-media transition">Conditions d'utilisation</a></li>
+                        <li><a href="privacy.html" class="hover:text-orange-media transition">Politique de confidentialité</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-orange-media mb-4">Suivez-nous</h4>
+                    <div class="flex gap-4 text-xl">
+                        <a href="https://facebook.com" class="hover:text-orange-media transition" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://youtube.com" class="hover:text-orange-media transition" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com" class="hover:text-orange-media transition" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+                <p>&copy; 2026 Scoop243.net. Tous droits réservés. | Au coeur de l'infos</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+    <script src="config.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Test Supabase — VotreMédia</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+  <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;margin:24px;color:#0f172a}pre{background:#f8fafc;padding:12px;border-radius:6px;overflow:auto}</style>
+</head>
+<body>
+  <h1>Test de connexion Supabase</h1>
+  <p>Ce test exécute <code>SELECT * FROM articles LIMIT 5</code> et affiche le résultat.</p>
+
+  <button id="run" style="background:#F37021;color:white;border:none;padding:10px 14px;border-radius:6px;cursor:pointer">Exécuter le test</button>
+  <div id="status" style="margin-top:12px;color:#334155">Statut : <span id="stat">en attente</span></div>
+  <h2 style="margin-top:18px">Réponse (console + page)</h2>
+  <pre id="output">—</pre>
+
+  <script src="config.js"></script>
+  <script>
+    const btn = document.getElementById('run');
+    const out = document.getElementById('output');
+    const stat = document.getElementById('stat');
+
+    function show(obj){ out.textContent = JSON.stringify(obj, null, 2); console.log(obj); }
+
+    btn.addEventListener('click', async () => {
+      if (!window.supabase || !window.supabase.createClient) {
+        stat.textContent = 'Erreur : script Supabase non chargé.';
+        show({ error: 'Supabase SDK missing' });
+        return;
+      }
+      if (!supabaseClient) {
+        stat.textContent = 'Erreur : supabaseClient non initialisé (vérifiez config.js).';
+        show({ error: 'supabaseClient not initialized' });
+        return;
+      }
+
+      stat.textContent = 'En cours...';
+      try {
+        const { data, error, status } = await supabaseClient
+          .from('articles')
+          .select('*')
+          .limit(5);
+
+        if (error) {
+          stat.textContent = 'Erreur lors de la requête';
+          show({ status, error });
+          return;
+        }
+
+        stat.textContent = 'Succès — articles récupérés';
+        show({ status, data });
+      } catch (err) {
+        stat.textContent = 'Erreur inattendue';
+        show({ exception: String(err) });
+      }
+    });
+  </script>
+</body>
+</html>
