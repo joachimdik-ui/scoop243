@@ -94,22 +94,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-});function demarrerBarreInfos() {
+});document.addEventListener('DOMContentLoaded', () => {
+    console.log("Le script est bien chargé !"); // Ceci s'affichera dans la console
+
     const afficheurDate = document.getElementById('live-date');
     const afficheurHorloge = document.getElementById('live-clock');
 
     function mettreAJour() {
         const maintenant = new Date();
 
-        // 1. Gestion de la Date (ex: Vendredi 13 Février 2026)
-        const optionsDate = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        // Date
         if (afficheurDate) {
-            // Met la première lettre en majuscule (ex: vendredi -> Vendredi)
-            const dateLongue = maintenant.toLocaleDateString('fr-FR', optionsDate);
+            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            let dateLongue = maintenant.toLocaleDateString('fr-FR', options);
             afficheurDate.textContent = dateLongue.charAt(0).toUpperCase() + dateLongue.slice(1);
         }
 
-        // 2. Gestion de l'Heure
+        // Heure
         if (afficheurHorloge) {
             const h = String(maintenant.getHours()).padStart(2, '0');
             const m = String(maintenant.getMinutes()).padStart(2, '0');
@@ -118,9 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Mise à jour immédiate puis toutes les secondes
     mettreAJour();
     setInterval(mettreAJour, 1000);
-}
-
-demarrerBarreInfos();
+});
