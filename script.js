@@ -94,24 +94,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-});// Fonction pour mettre à jour l'horloge
-function demarrerHorloge() {
+});function demarrerBarreInfos() {
+    const afficheurDate = document.getElementById('live-date');
     const afficheurHorloge = document.getElementById('live-clock');
-    
-    if (afficheurHorloge) { // On vérifie que l'élément existe pour éviter les erreurs
-        setInterval(() => {
-            const maintenant = new Date();
-            
-            // On récupère heures, minutes, secondes
+
+    function mettreAJour() {
+        const maintenant = new Date();
+
+        // 1. Gestion de la Date (ex: Vendredi 13 Février 2026)
+        const optionsDate = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        if (afficheurDate) {
+            // Met la première lettre en majuscule (ex: vendredi -> Vendredi)
+            const dateLongue = maintenant.toLocaleDateString('fr-FR', optionsDate);
+            afficheurDate.textContent = dateLongue.charAt(0).toUpperCase() + dateLongue.slice(1);
+        }
+
+        // 2. Gestion de l'Heure
+        if (afficheurHorloge) {
             const h = String(maintenant.getHours()).padStart(2, '0');
             const m = String(maintenant.getMinutes()).padStart(2, '0');
             const s = String(maintenant.getSeconds()).padStart(2, '0');
-            
-            // On affiche le résultat
             afficheurHorloge.textContent = `${h}:${m}:${s}`;
-        }, 1000);
+        }
     }
+
+    // Mise à jour immédiate puis toutes les secondes
+    mettreAJour();
+    setInterval(mettreAJour, 1000);
 }
 
-// On lance la fonction
-demarrerHorloge();
+demarrerBarreInfos();
