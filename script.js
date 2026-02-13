@@ -94,4 +94,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-});
+});// Fonction pour mettre à jour l'horloge
+function demarrerHorloge() {
+    const afficheurHorloge = document.getElementById('live-clock');
+    
+    if (afficheurHorloge) { // On vérifie que l'élément existe pour éviter les erreurs
+        setInterval(() => {
+            const maintenant = new Date();
+            
+            // On récupère heures, minutes, secondes
+            const h = String(maintenant.getHours()).padStart(2, '0');
+            const m = String(maintenant.getMinutes()).padStart(2, '0');
+            const s = String(maintenant.getSeconds()).padStart(2, '0');
+            
+            // On affiche le résultat
+            afficheurHorloge.textContent = `${h}:${m}:${s}`;
+        }, 1000);
+    }
+}
+
+// On lance la fonction
+demarrerHorloge();
