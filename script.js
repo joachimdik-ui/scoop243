@@ -94,3 +94,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+// Fonction isolée pour la barre d'infos
+function initialiserBarreInfos() {
+    const elDate = document.getElementById('live-date');
+    const elHorloge = document.getElementById('live-clock');
+
+    function rafraichir() {
+        const maintenant = new Date();
+
+        // Affichage de la date
+        if (elDate) {
+            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            let texteDate = maintenant.toLocaleDateString('fr-FR', options);
+            elDate.textContent = texteDate.charAt(0).toUpperCase() + texteDate.slice(1);
+        }
+
+        // Affichage de l'heure
+        if (elHorloge) {
+            const h = String(maintenant.getHours()).padStart(2, '0');
+            const m = String(maintenant.getMinutes()).padStart(2, '0');
+            const s = String(maintenant.getSeconds()).padStart(2, '0');
+            elHorloge.textContent = `${h}:${m}:${s}`;
+        }
+    }
+
+    // Lancement
+    rafraichir();
+    setInterval(rafraichir, 1000);
+}
+
+// On lance la fonction une fois que tout est prêt
+document.addEventListener('DOMContentLoaded', initialiserBarreInfos);
