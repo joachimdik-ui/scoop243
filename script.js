@@ -93,32 +93,4 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Recherche en cours pour : " + query);
         }
     });
-
-});document.addEventListener('DOMContentLoaded', () => {
-    console.log("Le script est bien chargé !"); // Ceci s'affichera dans la console
-
-    const afficheurDate = document.getElementById('live-date');
-    const afficheurHorloge = document.getElementById('live-clock');
-
-    function mettreAJour() {
-        const maintenant = new Date();
-
-        // Date
-        if (afficheurDate) {
-            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-            let dateLongue = maintenant.toLocaleDateString('fr-FR', options);
-            afficheurDate.textContent = dateLongue.charAt(0).toUpperCase() + dateLongue.slice(1);
-        }
-
-        // Heure
-        if (afficheurHorloge) {
-            const h = String(maintenant.getHours()).padStart(2, '0');
-            const m = String(maintenant.getMinutes()).padStart(2, '0');
-            const s = String(maintenant.getSeconds()).padStart(2, '0');
-            afficheurHorloge.textContent = `${h}:${m}:${s}`;
-        }
-    }
-
-    mettreAJour();
-    setInterval(mettreAJour, 1000);
 });

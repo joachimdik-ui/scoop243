@@ -3,6 +3,7 @@
  * Charge les articles depuis Supabase pour la page d'accueil
  * Charge aussi les articles populaires et les publicités
  */
+
 document.addEventListener('DOMContentLoaded', async () => {
   if (!supabaseClient) {
     console.error('Client Supabase non initialisé');
@@ -31,36 +32,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Article en vedette (le premier)
-// On récupère le container qui va recevoir les 3 articles
-const featuredContainer = document.getElementById('une-container'); 
-
-if (allArticles.length > 0 && featuredContainer) {
-    // On vide le container au cas où il y aurait du texte "Chargement..."
-    featuredContainer.innerHTML = '';
-
-    // On prend les 3 premiers articles du tableau
-    const top3 = allArticles.slice(0, 3);
-
-    top3.forEach(article => {
-        const imgUrl = article.image_url || article.image || 'https://via.placeholder.com/600x400';
-        const articleTitle = article.title || 'Sans titre';
-        
-        // On crée la structure HTML pour chaque article
-        featuredContainer.innerHTML += `
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-                <img src="${imgUrl}" alt="${articleTitle}" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <span class="text-orange-500 text-xs font-bold uppercase">${article.category || 'Actualité'}</span>
-                    <h3 class="font-bold text-lg mt-1 line-clamp-2">${articleTitle}</h3>
-                    <a href="article-details.html?title=${encodeURIComponent(articleTitle)}" 
-                       class="inline-block mt-4 text-slate-900 font-bold hover:underline">
-                        Lire la suite →
-                    </a>
-                </div>
-            </div>
-        `;
-    });
-}
+    const featured = allArticles[0];
+    if (featured && featuredImg && featuredTitle) {
+      const imgUrl = featured.image_url || featured.image || 'https://via.placeholder.com/1200x500';
+      featuredImg.src = imgUrl;
+      featuredTitle.textContent = featured.title || 'Titre';
+      featuredArticle.querySelector('a').href = `article-details.html?title=${encodeURIComponent(featured.title)}`;
     }
 
     // Autres articles (2 à 5)
