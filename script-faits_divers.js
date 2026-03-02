@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const { data, error } = await supabaseClient
       .from('articles')
       .select('*')
-      .eq('categorie', 'Faits divers')
+      .eq('categorie', 'Faits_divers')
       .order('published_at', { ascending: false });
 
     if (error) throw error;
