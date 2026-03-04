@@ -272,17 +272,17 @@
         // On génère les 5 articles avec object-cover pour l'adaptation parfaite
         container.innerHTML = sliderArticles.map(art => `
             <div class="slide-item">
-                <a href="article-details.html?id=${art.id}" class="block h-full w-full">
-                    <img src="${art.image_url}" 
-                         class="w-full h-full object-cover object-center" 
-                         alt="${art.title}">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-                    <div class="absolute bottom-0 p-4 md:p-8 text-white z-10">
-                        <span class="bg-orange-media text-[10px] md:text-xs px-2 py-1 font-bold uppercase">${art.categorie || 'À la une'}</span>
-                        <h2 class="text-xl md:text-3xl lg:text-4xl font-black mt-2 leading-tight">${art.title}</h2>
-                    </div>
-                </a>
-            </div>
+    <a href="article-details.html?title=${encodeURIComponent(art.title)}" class="block h-full w-full">
+        <img src="${art.image_url}" 
+             class="w-full h-full object-cover object-center" 
+             alt="${art.title}">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-0 p-4 md:p-8 text-white z-10">
+            <span class="bg-orange-media text-[10px] md:text-xs px-2 py-1 font-bold uppercase">${art.categorie || 'À la une'}</span>
+            <h2 class="text-xl md:text-3xl lg:text-4xl font-black mt-2 leading-tight">${art.title}</h2>
+        </div>
+    </a>
+</div>
         `).join('');
 
         createDots();
