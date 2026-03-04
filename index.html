@@ -9,29 +9,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root { --orange-media: #F37021; }
-        .bg-orange-media { background-color: var(--orange-media); }
-        .text-orange-media { color: var(--orange-media); }
-        /* Masquer la scrollbar pour le menu mobile tout en permettant le défilement */
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    :root { --orange-media: #F37021; }
+    .bg-orange-media { background-color: var(--orange-media); }
+    .text-orange-media { color: var(--orange-media); }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Ajoute cela dans ton bloc <style> existant */
-/* À mettre entre <style> et </style> */
-#slider-container {
-    display: flex;
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 100%; /* Force la hauteur à 100% du cadre parent */
-    width: 100%;
-}
+    /* Moteur du slider glissant */
+    #slider-container {
+        display: flex;
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        width: 100%;
+    }
 
-.slide-item {
-    min-width: 100%;
-    height: 100%; /* Oblige chaque slide à remplir toute la hauteur */
-    position: relative;
-    overflow: hidden; /* Empêche l'image de dépasser du cadre arrondi */
-}
-    </style>
+    .slide-item {
+        min-width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+</style>
     
 </head>
 <body class="bg-gray-50 text-gray-900 overflow-x-hidden">
@@ -258,55 +256,69 @@
         let currentSlide = 0;
 
         async function initSlider() {
-            // On vérifie si supabaseClient est bien chargé via config.js
-            if (!supabaseClient) return;
+        if (!supabaseClient) return;
 
-            const { data, error } = await supabaseClient
-                .from('articles')
-                .select('*')
-                .order('published_at', { ascending: false })
-                .limit(5);
+        const { data, error } = await supabaseClient
+            .from('articles')
+            .select('*')
+            .order('published_at', { ascending: false })
+            .limit(5);
 
-            if (!error && data) {
-                sliderArticles = data;
-                updateSliderView(0);
-                createDots();
-                setInterval(() => {
-                    currentSlide = (currentSlide + 1) % sliderArticles.length;
-                    updateSliderView(currentSlide);
-                }, 5000);
-            }
-        }
+        if (error || !data) return;
+        sliderArticles = data;
 
-        function updateSliderView(index) {
-            const container = document.getElementById('slider-container');
-            const art = sliderArticles[index];
-            container.innerHTML = `
-                <a href="article-details.html?id=${art.id}" class="block relative h-full">
-                    <img src="${art.image_url}" class="w-full h-64 md:h-[400px] lg:h-[500px] object-cover transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+        const container = document.getElementById('slider-container');
+        
+        // On génère les 5 articles avec object-cover pour l'adaptation parfaite
+        container.innerHTML = sliderArticles.map(art => `
+            <div class="slide-item">
+                <a href="article-details.html?id=${art.id}" class="block h-full w-full">
+                    <img src="${art.image_url}" 
+                         class="w-full h-full object-cover object-center" 
+                         alt="${art.title}">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
                     <div class="absolute bottom-0 p-4 md:p-8 text-white z-10">
-                        <span class="bg-orange-media text-[10px] md:text-xs px-2 py-1 font-bold uppercase">${art.categorie}</span>
+                        <span class="bg-orange-media text-[10px] md:text-xs px-2 py-1 font-bold uppercase">${art.categorie || 'À la une'}</span>
                         <h2 class="text-xl md:text-3xl lg:text-4xl font-black mt-2 leading-tight">${art.title}</h2>
                     </div>
-                </a>`;
-            updateDots(index);
-        }
+                </a>
+            </div>
+        `).join('');
 
-        function createDots() {
-            const dotsContainer = document.getElementById('slider-dots');
-            dotsContainer.innerHTML = sliderArticles.map((_, i) => `<div id="dot-${i}" class="h-1.5 w-1.5 rounded-full bg-white/40"></div>`).join('');
-        }
+        createDots();
 
-        function updateDots(index) {
-            sliderArticles.forEach((_, i) => {
-                const dot = document.getElementById(`dot-${i}`);
-                if(dot) dot.className = (i === index) ? "h-1.5 w-6 rounded-full bg-orange-media" : "h-1.5 w-1.5 rounded-full bg-white/40";
-            });
-        }
+        // On garde le temps de 5 secondes (5000ms)
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % sliderArticles.length;
+            moveSlider(currentSlide);
+        }, 5000);
+    }
 
-        document.addEventListener('DOMContentLoaded', initSlider);
-    </script>
+    function moveSlider(index) {
+        const container = document.getElementById('slider-container');
+        container.style.transform = `translateX(-${index * 100}%)`;
+        updateDots(index);
+    }
+
+    function createDots() {
+        const dotsDiv = document.getElementById('slider-dots');
+        dotsDiv.innerHTML = sliderArticles.map((_, i) => `
+            <div id="dot-${i}" class="h-1.5 w-1.5 rounded-full bg-white/40 transition-all"></div>
+        `).join('');
+        updateDots(0);
+    }
+
+    function updateDots(index) {
+        sliderArticles.forEach((_, i) => {
+            const d = document.getElementById(`dot-${i}`);
+            if(d) d.className = (i === index) 
+                ? "h-1.5 w-6 rounded-full bg-orange-media transition-all" 
+                : "h-1.5 w-1.5 rounded-full bg-white/40 transition-all";
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initSlider);
+</script>
 
 </body> </html>
     <script src="script-index.js"></script>
