@@ -53,34 +53,52 @@
     </header>
 
     <nav class="bg-orange-media sticky top-0 z-50 shadow-md">
-        <div class="container mx-auto flex items-center justify-between px-2 md:px-4 gap-4">
-            <ul class="flex overflow-x-auto hide-scrollbar text-white font-bold uppercase text-[11px] md:text-sm tracking-wide">
-                <li class="whitespace-nowrap"><a href="index.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Accueil</a></li>
-                <li class="whitespace-nowrap"><a href="politique.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Politique</a></li>
-                <li class="whitespace-nowrap"><a href="justice.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Justice</a></li>
-                <li class="whitespace-nowrap"><a href="economie.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Économie</a></li>
-                <li class="whitespace-nowrap"><a href="sports.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Sports</a></li>
-                <li class="whitespace-nowrap"><a href="culture.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Culture</a></li>
-                <li class="whitespace-nowrap"><a href="faits_divers.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Société</a></li>
-                <li class="whitespace-nowrap"><a href="religion.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Religion</a></li>
-                <li class="whitespace-nowrap"><a href="informateur.html" class="px-2 md:px-3 py-4 block hover:bg-black/10 transition text-yellow-300"></i> Informateur</a></li>
-            </ul>
-            <div class="max-w-md mx-auto my-4 px-4">
-    <div class="relative flex items-center h-10 bg-white border border-gray-200 rounded-full shadow-sm group focus-within:border-orange-media transition-all">
-        
-        <i class="fas fa-search ml-4 text-gray-400 text-xs group-focus-within:text-orange-media"></i>
-        
-        <input type="text" 
-               id="search-input" 
-               placeholder="Rechercher..." 
-               class="flex-grow bg-transparent px-3 text-sm outline-none text-gray-700">
-        
-        <button id="search-btn" 
-                class="h-8 px-4 mr-1 bg-orange-media text-white text-[10px] font-black uppercase rounded-full hover:bg-black transition-colors">
-            OK
-        </button>
-    </div>
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-14">
+                
+                <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl focus:outline-none p-2">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <ul class="hidden lg:flex items-center text-white font-bold uppercase text-sm tracking-wide h-full">
+                    <li><a href="index.html" class="px-4 py-5 block hover:bg-black/10">Accueil</a></li>
+                    <li><a href="politique.html" class="px-4 py-5 block hover:bg-black/10">Politique</a></li>
+                    <li><a href="justice.html" class="px-4 py-5 block hover:bg-black/10">Justice</a></li>
+                    <li><a href="economie.html" class="px-4 py-5 block hover:bg-black/10">Économie</a></li>
+                    <li><a href="sports.html" class="px-4 py-5 block hover:bg-black/10">Sports</a></li>
+                    <li><a href="culture.html" class="px-4 py-5 block hover:bg-black/10">Culture</a></li>
+                    <li><a href="faits_divers.html" class="px-4 py-5 block hover:bg-black/10">Société</a></li>
+                    <li><a href="religion.html" class="px-4 py-5 block hover:bg-black/10">Religion</a></li>
+                    <li><a href="informateur.html" class="px-4 py-5 block hover:bg-black/10 text-yellow-300 italic">Informateur</a></li>
+                </ul>
+
+                <div class="flex items-center h-9 bg-white rounded-full shadow-sm group w-full max-w-[200px] md:max-w-md ml-4">
+    <i class="fas fa-search ml-3 text-gray-400 text-xs"></i>
+    <input type="text" 
+           id="search-input" 
+           placeholder="Rechercher..." 
+           class="w-full bg-transparent px-2 text-[11px] outline-none text-gray-700">
+    <button id="search-btn" class="hidden md:block h-7 px-3 mr-1 bg-orange-media text-white text-[10px] font-black uppercase rounded-full">
+        OK
+    </button>
 </div>
+            </div>
+
+            <div id="mobile-menu-content" class="lg:hidden hidden bg-zinc-900 border-t border-white/10 overflow-hidden transition-all duration-300">
+                <ul class="flex flex-col text-white font-bold uppercase text-xs py-2">
+                    <li><a href="index.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Accueil</a></li>
+                    <li><a href="politique.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Politique</a></li>
+                    <li><a href="justice.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Justice</a></li>
+                    <li><a href="economie.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Économie</a></li>
+                    <li><a href="sports.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Sports</a></li>
+                    <li><a href="culture.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Culture</a></li>
+                    <li><a href="faits_divers.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Société</a></li>
+                    <li><a href="religion.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Religion</a></li>
+                    <li><a href="informateur.html" class="px-6 py-4 block text-yellow-300 italic">Devenir Informateur</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
         </div>
     </nav>
     <main class="container mx-auto px-2 md:px-4 mt-6">
