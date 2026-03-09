@@ -223,5 +223,56 @@
         });
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- 1. FONCTION HORLOGE ---
+        const updateClock = () => {
+            const now = new Date();
+            const dateEl = document.getElementById('live-date');
+            const clockEl = document.getElementById('live-clock');
+
+            if (dateEl) {
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                let dateStr = now.toLocaleDateString('fr-FR', options);
+                dateEl.textContent = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+            }
+            if (clockEl) {
+                const h = String(now.getHours()).padStart(2, '0');
+                const m = String(now.getMinutes()).padStart(2, '0');
+                const s = String(now.getSeconds()).padStart(2, '0');
+                clockEl.textContent = `${h}:${m}:${s}`;
+            }
+        };
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // --- 2. MENU MOBILE ---
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const menuContent = document.getElementById('mobile-menu-content');
+        if (menuBtn && menuContent) {
+            menuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                menuContent.classList.toggle('hidden');
+                const icon = menuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                }
+            });
+        }
+
+        // --- 3. RECHERCHE ---
+        const searchInput = document.getElementById('search-input');
+        const searchBtn = document.getElementById('search-btn');
+        if (searchInput) {
+            const doSearch = () => {
+                const q = searchInput.value.trim();
+                if (q) window.location.href = `search.html?q=${encodeURIComponent(q)}`;
+            };
+            if (searchBtn) searchBtn.addEventListener('click', doSearch);
+            searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') doSearch(); });
+        }
+    });
+</script>
 </body>
 </html>
