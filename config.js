@@ -13,3 +13,33 @@ const SUPABASE_CONFIG = {
 const supabaseClient = window.supabase 
   ? supabase.createClient(SUPABASE_CONFIG.URL, SUPABASE_CONFIG.ANON_KEY)
   : null;
+
+  /**
+ * GESTION DE LA RECHERCHE SCOOP243
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    // On cible le champ de saisie et le bouton par leurs IDs
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.getElementById('search-btn');
+
+    if (searchInput && searchBtn) {
+        // Fonction qui lance la redirection
+        const lancerRecherche = () => {
+            const motCle = searchInput.value.trim();
+            if (motCle.length > 0) {
+                // Redirige vers la page de résultats avec le mot-clé dans l'URL
+                window.location.href = `search-results.html?q=${encodeURIComponent(motCle)}`;
+            }
+        };
+
+        // Écoute du clic sur le bouton "OK"
+        searchBtn.addEventListener('click', lancerRecherche);
+
+        // Écoute de la touche "Entrée" sur le clavier
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                lancerRecherche();
+            }
+        });
+    }
+});

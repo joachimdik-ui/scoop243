@@ -83,21 +83,87 @@
 </div>
         </div>
     </nav>
-    <main class="container mx-auto px-2 md:px-4 mt-6">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
-            
-            <div class="lg:col-span-8">
-                <h1 class="text-2xl md:text-3xl font-black mb-6">Actualités Économie</h1>
 
-                <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                    <!-- Les articles seront insérés ici par script-economie.js -->
+    <main class="container mx-auto px-4 py-12 max-w-6xl">
+        <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-black uppercase mb-4 tracking-tight">Devenir <span class="text-orange-media">Informateur</span></h1>
+            <div class="w-24 h-1.5 bg-orange-media mx-auto"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div class="lg:col-span-2 space-y-6 text-gray-800 text-base leading-relaxed">
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                    <p class="font-bold text-lg mb-4">
+                        Vous êtes témoin d'un événement marquant en République Démocratique du Congo ? <span class="text-orange-media">Scoop243.net</span> vous donne la parole.
+                    </p>
+                    <p class="mb-4">
+                        Comme les "Observateurs", devenez un acteur de l'information. Si vous détenez des photos, des vidéos ou des informations exclusives sur l'actualité de votre province, de votre ville ou de votre quartier, n'hésitez pas à nous les transmettre.
+                    </p>
+                    <p class="mb-4">
+                        Votre contribution peut aider à informer le public, alerter les autorités et mettre en lumière les réalités vécues sur le terrain.
+                    </p>
+                    <p class="font-semibold italic text-orange-media">
+                        Envoyez-nous vos contenus et participez à une information citoyenne, libre et responsable.
+                    </p>
                 </div>
+
+                <<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+    <a href="https://wa.me/243855780151" target="_blank" class="flex items-center p-4 bg-white border rounded-lg shadow-sm hover:shadow-md hover:border-green-500 transition-all group">
+        <i class="fab fa-whatsapp text-3xl text-green-500 mr-4 group-hover:scale-110 transition-transform"></i>
+        <div>
+            <p class="font-bold text-sm uppercase">WhatsApp Urgence</p>
+            <p class="text-xs text-gray-500">+243 855 780 151</p>
+        </div>
+    </a>
+
+    <a href="mailto:contact@scoop243.net" class="flex items-center p-4 bg-white border rounded-lg shadow-sm hover:shadow-md hover:border-orange-media transition-all group">
+        <i class="fas fa-envelope text-3xl text-orange-media mr-4 group-hover:scale-110 transition-transform"></i>
+        <div>
+            <p class="font-bold text-sm uppercase">E-mail Rédaction</p>
+            <p class="text-xs text-gray-500">contact@scoop243.net</p>
+        </div>
+    </a>
+</div>
             </div>
 
+            <aside>
+                <div class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-orange-media sticky top-24">
+                    <h3 class="text-lg font-bold mb-6 uppercase text-center italic">Alerte Rapide</h3>
+                    <form id="alerteForm" class="space-y-4">
+                        <div>
+                            <label class="text-[10px] uppercase font-bold text-gray-400">Nom / Pseudonyme</label>
+                            <input type="text" id="nom" class="w-full p-3 bg-gray-50 border rounded text-sm focus:ring-1 focus:ring-orange-media outline-none" required>
+                        </div>
+                        <div>
+                            <label class="text-[10px] uppercase font-bold text-gray-400">Lieu de l'événement</label>
+                            <input type="text" id="lieu" class="w-full p-3 bg-gray-50 border rounded text-sm focus:ring-1 focus:ring-orange-media outline-none" required>
+                        </div>
+                        <div>
+                            <label class="text-[10px] uppercase font-bold text-gray-400">Détails de l'info</label>
+                            <textarea id="message" class="w-full p-3 bg-gray-50 border rounded text-sm h-28 focus:ring-1 focus:ring-orange-media outline-none" required></textarea>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold text-gray-400">Preuve en image (Optionnel)</label>
+                            <div class="relative border-2 border-dashed border-gray-200 rounded-lg p-4 hover:border-orange-media transition-colors bg-gray-50 text-center cursor-pointer">
+                                <input type="file" id="photo" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                <div id="preview-text">
+                                    <i class="fas fa-camera text-2xl text-gray-400 mb-1"></i>
+                                    <p class="text-[10px] text-gray-500" id="file-name">Cliquez pour joindre une photo</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="w-full bg-orange-media text-white font-bold py-3 rounded hover:bg-black transition-all shadow-md uppercase text-sm">
+                            Envoyer mon alerte
+                        </button>
+                    </form>
+                </div>
+            </aside>
         </div>
     </main>
 
-    <footer class="bg-zinc-900 text-gray-400 mt-12 py-8 px-3">
+     <footer class="bg-zinc-900 text-gray-400 mt-12 py-8 px-3">
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8 text-[11px] md:text-sm">
                 
@@ -174,8 +240,69 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
     <script src="config.js"></script>
-    <script src="script-economie.js"></script>
-    <script src="script.js"></script>
-    <script src="search.js"></script>
+    <script>
+        // Gestion du texte du fichier sélectionné
+        document.getElementById('photo').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || "Cliquez pour joindre une photo";
+            document.getElementById('file-name').innerText = fileName;
+            document.getElementById('file-name').classList.add('text-orange-media', 'font-bold');
+        });
+
+        document.getElementById('alerteForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const photoFile = document.getElementById('photo').files[0];
+            
+            btn.innerText = "ENVOI EN COURS...";
+            btn.disabled = true;
+
+            try {
+                let imageUrl = null;
+
+                // 1. Gestion de l'image (Upload vers le Storage)
+                if (photoFile) {
+                    const fileExt = photoFile.name.split('.').pop();
+                    const fileName = `${Date.now()}-${Math.floor(Math.random() * 1000)}.${fileExt}`;
+                    const filePath = `${fileName}`;
+
+                    const { error: uploadError } = await supabaseClient.storage
+                        .from('medias') 
+                        .upload(filePath, photoFile);
+
+                    if (uploadError) throw uploadError;
+
+                    const { data: publicUrlData } = supabaseClient.storage
+                        .from('medias')
+                        .getPublicUrl(filePath);
+                    
+                    imageUrl = publicUrlData.publicUrl;
+                }
+
+                // 2. Envoi des données vers la Table 'alertes'
+                const { error: insertError } = await supabaseClient
+                    .from('alertes')
+                    .insert([{ 
+                        nom_expediteur: document.getElementById('nom').value, 
+                        localisation: document.getElementById('lieu').value, 
+                        contenu_alerte: document.getElementById('message').value,
+                        image_url: imageUrl
+                    }]);
+
+                if (insertError) throw insertError;
+
+                alert('✅ Merci ! Votre alerte a bien été reçue par la rédaction.');
+                document.getElementById('alerteForm').reset();
+                document.getElementById('file-name').innerText = "Cliquez pour joindre une photo";
+                document.getElementById('file-name').classList.remove('text-orange-media', 'font-bold');
+
+            } catch (err) {
+                console.error('Erreur:', err);
+                alert("Désolé, une erreur est survenue. Veuillez réessayer ou nous contacter par WhatsApp.");
+            } finally {
+                btn.innerText = "ENVOYER MON ALERTE";
+                btn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>

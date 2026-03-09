@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage Photo | scoop243.net</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-zinc-950 text-white min-h-screen">
+
+    <header class="p-4 border-b border-zinc-800 flex justify-between items-center sticky top-0 bg-zinc-950/90 backdrop-blur-md z-50">
+        <a href="index.html" class="text-orange-500 font-bold uppercase text-xs tracking-widest hover:text-white transition">
+            <i class="fas fa-arrow-left mr-2"></i> Retour
+        </a>
+        <h1 id="titre-reportage" class="text-sm md:text-xl font-black uppercase italic tracking-tighter text-center px-4">Chargement...</h1>
+        <div class="w-10"></div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div id="photos-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            </div>
+    </main>
+
+    <div id="visionneuse" class="fixed inset-0 bg-black/80 backdrop-blur-xl flex flex-col items-center justify-center hidden z-[100] p-4 transition-all duration-300">
+        
+        <button onclick="fermerVisionneuse()" class="absolute top-6 right-6 text-white/50 hover:text-orange-500 text-4xl z-[110] transition">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <button onclick="changerImage(-1)" class="absolute left-4 md:left-10 text-white/30 hover:text-orange-500 text-5xl z-[110] transition">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="max-w-full max-h-[85vh] flex flex-col items-center">
+            <img id="img-zoom" src="" class="max-w-full max-h-[75vh] object-contain shadow-2xl border border-white/10 rounded-sm">
+            <div class="bg-black/50 backdrop-blur-md p-4 mt-4 rounded-lg border border-white/5 max-w-2xl">
+                <p id="legende-zoom" class="text-white text-sm md:text-base font-medium text-center"></p>
+                <p id="compteur-zoom" class="text-orange-500 text-[10px] uppercase tracking-widest text-center mt-1 font-bold"></p>
+            </div>
+        </div>
+
+        <button onclick="changerImage(1)" class="absolute right-4 md:right-10 text-white/30 hover:text-orange-500 text-5xl z-[110] transition">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+    <script src="config.js"></script>
+
+    <script>
+        let toutesLesPhotos = [];
+        let indexActuel = 0;
+
+        async function chargerGalerie() {
+            const params = new URLSearchParams(window.location.search);
+            const reportageId = params.get('id');
+
+            if (!reportageId) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            try {
+                // 1. Infos du reportage
+                const { data: info } = await supabaseClient
+                    .from('reportages')
+                    .select('titre')
+                    .eq('id', reportageId)
+                    .single();
+                
+                if (info) document.getElementById('titre-reportage').innerText = info.titre;
+
+                // 2. Photos liées
+                const { data: photos, error } = await supabaseClient
+                    .from('reportage_photos')
+                    .select('*')
+                    .eq('reportage_id', reportageId)
+                    .order('ordre', { ascending: true });
+
+                if (error) throw error;
+
+                if (photos && photos.length > 0) {
+                    toutesLesPhotos = photos;
+                    const grid = document.getElementById('photos-grid');
+                    grid.innerHTML = photos.map((p, index) => `
+                        <div class="aspect-square overflow-hidden bg-zinc-900 cursor-pointer group border border-zinc-800">
+                            <img src="${p.image_url}" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
+                                 onclick="ouvrirVisionneuse(${index})">
+                        </div>
+                    `).join('');
+                }
+            } catch (err) {
+                console.error("Erreur Galerie:", err);
+            }
+        }
+
+        function ouvrirVisionneuse(index) {
+            indexActuel = index;
+            const photo = toutesLesPhotos[indexActuel];
+            
+            const imgZoom = document.getElementById('img-zoom');
+            imgZoom.src = photo.image_url;
+            
+            document.getElementById('legende-zoom').innerText = photo.legende || "";
+            document.getElementById('compteur-zoom').innerText = `${indexActuel + 1} / ${toutesLesPhotos.length}`;
+            
+            document.getElementById('visionneuse').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function changerImage(direction) {
+            indexActuel += direction;
+            
+            if (indexActuel >= toutesLesPhotos.length) indexActuel = 0;
+            if (indexActuel < 0) indexActuel = toutesLesPhotos.length - 1;
+            
+            ouvrirVisionneuse(indexActuel);
+        }
+
+        function fermerVisionneuse() {
+            document.getElementById('visionneuse').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Contrôles clavier
+        document.addEventListener('keydown', (e) => {
+            const isVisible = !document.getElementById('visionneuse').classList.contains('hidden');
+            if (!isVisible) return;
+
+            if (e.key === "ArrowRight") changerImage(1);
+            if (e.key === "ArrowLeft") changerImage(-1);
+            if (e.key === "Escape") fermerVisionneuse();
+        });
+
+        document.addEventListener('DOMContentLoaded', chargerGalerie);
+    </script>
+</body>
+</html>

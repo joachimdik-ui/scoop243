@@ -57,16 +57,30 @@
             <ul class="flex overflow-x-auto hide-scrollbar text-white font-bold uppercase text-[11px] md:text-sm tracking-wide">
                 <li class="whitespace-nowrap"><a href="index.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Accueil</a></li>
                 <li class="whitespace-nowrap"><a href="politique.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Politique</a></li>
+                <li class="whitespace-nowrap"><a href="justice.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Justice</a></li>
                 <li class="whitespace-nowrap"><a href="economie.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Économie</a></li>
                 <li class="whitespace-nowrap"><a href="sports.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Sports</a></li>
                 <li class="whitespace-nowrap"><a href="culture.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Culture</a></li>
                 <li class="whitespace-nowrap"><a href="faits_divers.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Société</a></li>
                 <li class="whitespace-nowrap"><a href="religion.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Religion</a></li>
+                <li class="whitespace-nowrap"><a href="informateur.html" class="px-2 md:px-3 py-4 block hover:bg-black/10 transition text-yellow-300"></i> Informateur</a></li>
             </ul>
-            <form id="search-form" class="hidden md:flex items-center gap-2 ml-auto">
-                <input type="text" id="search-input" placeholder="Rechercher..." class="px-3 py-2 rounded text-black text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400" />
-                <button type="submit" class="bg-white text-orange-media px-3 py-2 rounded font-bold text-sm hover:bg-yellow-400 transition"><i class="fas fa-search"></i></button>
-            </form>
+            <div class="max-w-md mx-auto my-4 px-4">
+    <div class="relative flex items-center h-10 bg-white border border-gray-200 rounded-full shadow-sm group focus-within:border-orange-media transition-all">
+        
+        <i class="fas fa-search ml-4 text-gray-400 text-xs group-focus-within:text-orange-media"></i>
+        
+        <input type="text" 
+               id="search-input" 
+               placeholder="Rechercher..." 
+               class="flex-grow bg-transparent px-3 text-sm outline-none text-gray-700">
+        
+        <button id="search-btn" 
+                class="h-8 px-4 mr-1 bg-orange-media text-white text-[10px] font-black uppercase rounded-full hover:bg-black transition-colors">
+            OK
+        </button>
+    </div>
+</div>
         </div>
     </nav>
 
@@ -104,6 +118,10 @@
                         <div class="bg-white p-4 rounded shadow-sm">
                             <h4 class="font-bold mb-2">Politique</h4>
                             <div id="cat-politique" class="space-y-3 text-sm text-gray-700">Chargement...</div>
+                        </div>
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h4 class="font-bold mb-2">Justice</h4>
+                            <div id="cat-justice" class="space-y-3 text-sm text-gray-700">Chargement...</div>
                         </div>
                         <div class="bg-white p-4 rounded shadow-sm">
                             <h4 class="font-bold mb-2">Économie</h4>
@@ -159,14 +177,21 @@
                 </div>
                 
                 <!-- Articles populaires -->
-                <div class="bg-gray-900 text-white p-4 rounded shadow-sm">
-                    <h4 class="font-bold border-b border-gray-700 pb-2 mb-4 uppercase text-sm flex items-center gap-2">
-                        <i class="fas fa-fire text-orange-media"></i> Populaire
-                    </h4>
-                    <div id="popular-articles" class="space-y-3">
-                        <p class="text-xs text-gray-400 text-center py-4">Chargement...</p>
-                    </div>
-                </div>
+                <div id="section-reportage-photo" class="bg-white p-3 shadow-sm border border-gray-100 mb-6 min-h-[300px]">
+    <h4 class="font-black text-[11px] uppercase tracking-tighter mb-3 flex items-center gap-2">
+        <span class="w-2 h-2 bg-orange-media rounded-full"></span> Le Reportage Photo
+    </h4>
+    
+    <div id="reportage-display" class="relative group h-80 overflow-hidden rounded-sm bg-gray-100">
+        <div class="flex items-center justify-center h-full">
+            <div class="animate-pulse text-gray-300 text-[9px] uppercase font-bold tracking-widest">
+                Chargement du reportage...
+            </div>
+        </div>
+    </div>
+
+    <div id="popular-articles" class="hidden"></div>
+</div>
                 
 
                     </div>
@@ -191,11 +216,13 @@
                     <h4 class="text-white font-bold mb-4 text-base">Rubriques</h4>
                     <ul class="space-y-2 text-gray-400">
                         <li><a href="politique.html" class="hover:text-orange-media transition">Politique</a></li>
+                        <li><a href="justice.html" class="hover:text-orange-media transition">Justice</a></li>
                         <li><a href="economie.html" class="hover:text-orange-media transition">Économie</a></li>
                         <li><a href="sports.html" class="hover:text-orange-media transition">Sports</a></li>
                         <li><a href="culture.html" class="hover:text-orange-media transition">Culture</a></li>
                         <li><a href="faits_divers.html" class="hover:text-orange-media transition">Société</a></li>
                         <li><a href="religion.html" class="hover:text-orange-media transition">Religion</a></li>
+                        <li><a href="informateur.html" class="hover:text-orange-media transition text-white">Devenir Informateur</a></li>
                     </ul>
                 </div>
                 
@@ -248,83 +275,127 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
     <script src="config.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
-    <script src="config.js"></script>
+    <script src="script-index.js"></script>
+    <script src="search.js"></script>
 
     <script>
+        // --- GESTION DE LA DATE ET DE L'HEURE ---
+        function updateDateTime() {
+            const now = new Date();
+            
+            // Date en français
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateStr = now.toLocaleDateString('fr-FR', options);
+            const dateEl = document.getElementById('live-date');
+            if (dateEl) dateEl.textContent = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+
+            // Horloge
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const clockEl = document.getElementById('live-clock');
+            if (clockEl) clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // --- GESTION DU SLIDER ---
         let sliderArticles = [];
         let currentSlide = 0;
 
         async function initSlider() {
-        if (!supabaseClient) return;
+            if (!supabaseClient) return;
+            try {
+                const { data, error } = await supabaseClient
+                    .from('articles')
+                    .select('*')
+                    .order('published_at', { ascending: false })
+                    .limit(5);
 
-        const { data, error } = await supabaseClient
-            .from('articles')
-            .select('*')
-            .order('published_at', { ascending: false })
-            .limit(5);
+                if (error || !data) return;
+                sliderArticles = data;
 
-        if (error || !data) return;
-        sliderArticles = data;
+                const container = document.getElementById('slider-container');
+                container.innerHTML = sliderArticles.map(art => `
+                    <div class="slide-item">
+                        <a href="article-details.html?title=${encodeURIComponent(art.title)}" class="block h-full w-full">
+                            <img src="${art.image_url}" class="w-full h-full object-cover object-center" alt="${art.title}">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-0 p-4 md:p-8 text-white z-10 text-left">
+                                <span class="bg-orange-media text-[10px] md:text-xs px-2 py-1 font-bold uppercase">${art.categorie || 'À la une'}</span>
+                                <h2 class="text-xl md:text-3xl lg:text-4xl font-black mt-2 leading-tight">${art.title}</h2>
+                            </div>
+                        </a>
+                    </div>
+                `).join('');
 
-        const container = document.getElementById('slider-container');
-        
-        // On génère les 5 articles avec object-cover pour l'adaptation parfaite
-        container.innerHTML = sliderArticles.map(art => `
-            <div class="slide-item">
-    <a href="article-details.html?title=${encodeURIComponent(art.title)}" class="block h-full w-full">
-        <img src="${art.image_url}" 
-             class="w-full h-full object-cover object-center" 
-             alt="${art.title}">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-        <div class="absolute bottom-0 p-4 md:p-8 text-white z-10">
-            <span class="bg-orange-media text-[10px] md:text-xs px-2 py-1 font-bold uppercase">${art.categorie || 'À la une'}</span>
-            <h2 class="text-xl md:text-3xl lg:text-4xl font-black mt-2 leading-tight">${art.title}</h2>
-        </div>
-    </a>
-</div>
-        `).join('');
+                createDots();
+                setInterval(() => {
+                    currentSlide = (currentSlide + 1) % sliderArticles.length;
+                    moveSlider(currentSlide);
+                }, 5000);
+            } catch (e) { console.error("Slider error:", e); }
+        }
 
-        createDots();
+        function moveSlider(index) {
+            const container = document.getElementById('slider-container');
+            if (container) container.style.transform = `translateX(-${index * 100}%)`;
+            updateDots(index);
+        }
 
-        // On garde le temps de 5 secondes (5000ms)
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % sliderArticles.length;
-            moveSlider(currentSlide);
-        }, 5000);
-    }
+        function createDots() {
+            const dotsDiv = document.getElementById('slider-dots');
+            if (!dotsDiv) return;
+            dotsDiv.innerHTML = sliderArticles.map((_, i) => `
+                <div id="dot-${i}" class="h-1.5 w-1.5 rounded-full bg-white/40 transition-all"></div>
+            `).join('');
+            updateDots(0);
+        }
 
-    function moveSlider(index) {
-        const container = document.getElementById('slider-container');
-        container.style.transform = `translateX(-${index * 100}%)`;
-        updateDots(index);
-    }
+        function updateDots(index) {
+            sliderArticles.forEach((_, i) => {
+                const d = document.getElementById(`dot-${i}`);
+                if(d) d.className = (i === index) ? "h-1.5 w-6 rounded-full bg-orange-media transition-all" : "h-1.5 w-1.5 rounded-full bg-white/40 transition-all";
+            });
+        }
 
-    function createDots() {
-        const dotsDiv = document.getElementById('slider-dots');
-        dotsDiv.innerHTML = sliderArticles.map((_, i) => `
-            <div id="dot-${i}" class="h-1.5 w-1.5 rounded-full bg-white/40 transition-all"></div>
-        `).join('');
-        updateDots(0);
-    }
+        // --- GESTION DU REPORTAGE PHOTO ---
+        async function chargerDernierReportage() {
+            const display = document.getElementById('reportage-display');
+            if (!display) return; 
+            try {
+                const { data, error } = await supabaseClient
+                    .from('reportages')
+                    .select('*')
+                    .order('published_at', { ascending: false })
+                    .limit(1)
+                    .single();
 
-    function updateDots(index) {
-        sliderArticles.forEach((_, i) => {
-            const d = document.getElementById(`dot-${i}`);
-            if(d) d.className = (i === index) 
-                ? "h-1.5 w-6 rounded-full bg-orange-media transition-all" 
-                : "h-1.5 w-1.5 rounded-full bg-white/40 transition-all";
+                if (error || !data) {
+                    display.innerHTML = `<div class="flex items-center justify-center h-full p-4 text-center"><p class="text-[10px] text-gray-400 uppercase font-bold text-center">Bientôt disponible :<br>Le Reportage Photo</p></div>`;
+                    return;
+                }
+
+                display.innerHTML = `
+                    <a href="galerie-reportage.html?id=${data.id}" class="group relative block w-full h-full overflow-hidden">
+                        <img src="${data.image_couverture}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${data.titre}">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-4 w-full text-left">
+                            <span class="text-[9px] font-bold text-orange-media uppercase tracking-widest bg-black/40 px-2 py-1 backdrop-blur-sm">${data.categorie || 'Reportage'}</span>
+                            <h2 class="text-white font-bold text-lg leading-tight mt-2 group-hover:text-orange-media transition-colors">${data.titre}</h2>
+                            <p class="text-gray-400 text-[10px] mt-1 uppercase font-medium">Voir l'album photo →</p>
+                        </div>
+                    </a>`;
+            } catch (err) { console.error("Erreur Reportage:", err); }
+        }
+
+        // --- LANCEMENT INITIAL ---
+        document.addEventListener('DOMContentLoaded', () => {
+            setInterval(updateDateTime, 1000);
+            updateDateTime();
+            initSlider();
+            chargerDernierReportage();
         });
-    }
-
-    document.addEventListener('DOMContentLoaded', initSlider);
-</script>
-
-</body> </html>
-    <script src="script-index.js"></script>
-    <script src="script.js"></script>
-    <script src="search.js"></script>
+    </script>
 </body>
 </html>

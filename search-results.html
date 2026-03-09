@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scoop243.net | Actualités en temps réel</title>
+    <link rel="icon" type="image/png" href=https://qkzzhjeeuierlqkqexrf.supabase.co/storage/v1/object/public/Logo/votre-logo.png>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+    :root { --orange-media: #F37021; }
+    .bg-orange-media { background-color: var(--orange-media); }
+    .text-orange-media { color: var(--orange-media); }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Moteur du slider glissant */
+    #slider-container {
+        display: flex;
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        width: 100%;
+    }
+
+    .slide-item {
+        min-width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+</style>
+    
+</head>
+<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
+<div id="top-bar" class="bg-slate-900 text-white py-2 px-4 flex justify-between items-center border-b border-slate-800">
+    <div id="live-date" class="text-xs md:text-sm font-medium text-slate-300">
+        Chargement...
+    </div>
+
+    <div class="flex items-center gap-2">
+        <span id="live-clock" class="font-mono font-bold text-orange-400 text-sm md:text-base">
+            00:00:00
+        </span>
+    </div>
+</div>
+    <header class="bg-white border-b" style="padding: 0.25cm 0;">
+        <div class="container mx-auto px-4 flex flex-col justify-center items-center">
+            <a href="index.html">
+                <img src="https://qkzzhjeeuierlqkqexrf.supabase.co/storage/v1/object/public/Logo/Nouveau%20projet.png" alt="Logo" class="h-40 md:h-40 lg:h-48 w-auto object-contain">
+            </a>
+        </div>
+    </header>
+
+    <nav class="bg-orange-media sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto flex items-center justify-between px-2 md:px-4 gap-4">
+            <ul class="flex overflow-x-auto hide-scrollbar text-white font-bold uppercase text-[11px] md:text-sm tracking-wide">
+                <li class="whitespace-nowrap"><a href="index.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Accueil</a></li>
+                <li class="whitespace-nowrap"><a href="politique.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Politique</a></li>
+                <li class="whitespace-nowrap"><a href="justice.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Justice</a></li>
+                <li class="whitespace-nowrap"><a href="economie.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Économie</a></li>
+                <li class="whitespace-nowrap"><a href="sports.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Sports</a></li>
+                <li class="whitespace-nowrap"><a href="culture.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Culture</a></li>
+                <li class="whitespace-nowrap"><a href="faits_divers.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Société</a></li>
+                <li class="whitespace-nowrap"><a href="religion.html" class="px-2 md:px-3 py-4 block hover:bg-black/10">Religion</a></li>
+                <li class="whitespace-nowrap"><a href="informateur.html" class="px-2 md:px-3 py-4 block hover:bg-black/10 transition text-yellow-300"></i> Informateur</a></li>
+            </ul>
+            <div class="max-w-md mx-auto my-4 px-4">
+    <div class="relative flex items-center h-10 bg-white border border-gray-200 rounded-full shadow-sm group focus-within:border-orange-media transition-all">
+        
+        <i class="fas fa-search ml-4 text-gray-400 text-xs group-focus-within:text-orange-media"></i>
+        
+        <input type="text" 
+               id="search-input" 
+               placeholder="Rechercher..." 
+               class="flex-grow bg-transparent px-3 text-sm outline-none text-gray-700">
+        
+        <button id="search-btn" 
+                class="h-8 px-4 mr-1 bg-orange-media text-white text-[10px] font-black uppercase rounded-full hover:bg-black transition-colors">
+            OK
+        </button>
+    </div>
+</div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-12 max-w-6xl">
+        <div class="text-center mb-12">
+            <h1 class="text-2xl md:text-3xl font-black uppercase mb-4 tracking-tight">
+                Résultats pour : <span id="search-query-display" class="text-orange-media italic">...</span>
+            </h1>
+            <div class="w-16 h-1 bg-gray-300 mx-auto"></div>
+        </div>
+
+        <div id="results-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="col-span-full text-center py-20">
+                <div class="animate-spin inline-block w-8 h-8 border-4 border-orange-media border-t-transparent rounded-full mb-4"></div>
+                <p class="text-gray-400 uppercase text-xs font-bold tracking-widest">Recherche dans la base de données...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-10 mt-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+                <div>
+                    <img src="https://qkzzhjeeuierlqkqexrf.supabase.co/storage/v1/object/public/Logo/Nouveau%20projet.png" alt="Logo" class="h-16 mb-4 filter brightness-0 invert mx-auto md:mx-0">
+                    <p class="text-gray-400 text-sm italic">"Au coeur de l'infos"</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-orange-media mb-4 uppercase text-xs">Navigation</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html" class="hover:text-white transition">Accueil</a></li>
+                        <li><a href="informateur.html" class="hover:text-white transition italic">Devenir Informateur</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-orange-media mb-4 uppercase text-xs">Contact</h4>
+                    <p class="text-sm text-gray-400">+243 855 780 151</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-[10px] text-gray-500 uppercase tracking-widest">
+                © 2026 Scoop243.net. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+    <script src="config.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const container = document.getElementById('results-container');
+            const queryDisplay = document.getElementById('search-query-display');
+            
+            const params = new URLSearchParams(window.location.search);
+            const query = params.get('q');
+
+            if (!query) {
+                container.innerHTML = `<p class="col-span-full text-center py-10 text-gray-500 uppercase text-xs font-bold tracking-widest">Veuillez entrer un terme de recherche.</p>`;
+                return;
+            }
+
+            queryDisplay.innerText = `"${query}"`;
+
+            try {
+                // Utilisation des colonnes exactes de votre base de données
+                const { data, error } = await supabaseClient
+                    .from('articles')
+                    .select('*')
+                    .or(`title.ilike.%${query}%,content.ilike.%${query}%`)
+                    .order('published_at', { ascending: false });
+
+                if (error) {
+                    console.error('Erreur Supabase détaillée:', error);
+                    throw error;
+                }
+
+                if (!data || data.length === 0) {
+                    container.innerHTML = `
+                        <div class="col-span-full text-center py-20">
+                            <i class="fas fa-search-minus text-4xl text-gray-200 mb-4"></i>
+                            <p class="text-gray-500 uppercase text-xs font-bold tracking-widest">Aucun article trouvé pour "${query}"</p>
+                        </div>`;
+                    return;
+                }
+
+                container.innerHTML = data.map(article => {
+                    // On gère les noms de colonnes : image_url, categorie, published_at
+                    const imgUrl = article.image_url || article.image || 'https://via.placeholder.com/800x450?text=Scoop243';
+                    const dateAffiche = article.published_at ? new Date(article.published_at).toLocaleDateString('fr-FR') : '';
+                    
+                    return `
+                    <article class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all">
+                        <a href="article-details.html?id=${article.id}">
+                            <img src="${imgUrl}" class="w-full h-44 object-cover" alt="${article.title}">
+                            <div class="p-5">
+                                <span class="text-[9px] bg-gray-100 text-orange-media px-2 py-0.5 rounded uppercase font-bold">
+                                    ${article.categorie || 'Info'}
+                                </span>
+                                <h2 class="text-lg font-bold mt-2 leading-tight hover:text-orange-media transition line-clamp-2">
+                                    ${article.title}
+                                </h2>
+                                <p class="text-[10px] text-gray-400 mt-2 uppercase">
+                                    Par ${article.author || 'Rédaction'} • ${dateAffiche}
+                                </p>
+                            </div>
+                        </a>
+                    </article>
+                    `;
+                }).join('');
+
+            } catch (err) {
+                console.error('Erreur de script:', err);
+                container.innerHTML = `<p class="col-span-full text-center text-red-500 font-bold uppercase text-xs tracking-widest">Erreur technique lors de la recherche.</p>`;
+            }
+        });
+    </script>
+</body>
+</body>
+</html>
