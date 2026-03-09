@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>scoop243.net | Actualités en temps réel</title>
-    <link rel="icon" type="image/png" href=https://qkzzhjeeuierlqkqexrf.supabase.co/storage/v1/object/public/Logo/votre-logo.png>
+    <title>Résultats de recherche | scoop243.net</title>
+    <link rel="icon" type="image/png" href="https://qkzzhjeeuierlqkqexrf.supabase.co/storage/v1/object/public/Logo/votre-logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -14,320 +14,168 @@
     .text-orange-media { color: var(--orange-media); }
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-    /* Moteur du slider glissant */
-    #slider-container {
-        display: flex;
-        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        height: 100%;
-        width: 100%;
-    }
-
-    .slide-item {
-        min-width: 100%;
-        height: 100%;
-        position: relative;
-        overflow: hidden;
-    }
-</style>
-    
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-900 overflow-x-hidden">
-<div id="top-bar" class="bg-slate-900 text-white py-2 px-4 flex justify-between items-center border-b border-slate-800">
-    <div id="live-date" class="text-xs md:text-sm font-medium text-slate-300">
-        Chargement...
+
+    <div class="bg-black text-white py-1.5 text-[10px] uppercase tracking-widest border-b border-white/10">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <span id="current-date" class="font-bold text-orange-media"></span>
+                <span id="live-clock" class="bg-orange-media text-black px-2 py-0.5 rounded font-black"></span>
+            </div>
+            <div class="hidden md:block italic text-gray-400">Recherche d'actualités</div>
+        </div>
     </div>
 
-    <div class="flex items-center gap-2">
-        <span id="live-clock" class="font-mono font-bold text-orange-400 text-sm md:text-base">
-            00:00:00
-        </span>
-    </div>
-</div>
     <header class="bg-white border-b" style="padding: 0.25cm 0;">
         <div class="container mx-auto px-4 flex flex-col justify-center items-center">
             <a href="index.html">
-                <img src="https://qkzzhjeeuierlqkqexrf.supabase.co/storage/v1/object/public/Logo/Nouveau%20projet.png" alt="Logo" class="h-40 md:h-40 lg:h-48 w-auto object-contain">
+                <img src="https://qkzzhjeeuierlqkqexrf.supabase.co/storage/v1/object/public/Logo/Nouveau%20projet.png" alt="Logo" class="h-24 md:h-40 lg:h-48 w-auto object-contain">
             </a>
         </div>
     </header>
 
     <nav class="bg-orange-media sticky top-0 z-50 shadow-md">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between h-14">
-                
-                <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl focus:outline-none p-2">
-                    <i class="fas fa-bars"></i>
+        <div class="container mx-auto flex items-center justify-between px-2 md:px-4 gap-4">
+            <button id="mobile-menu-btn" class="md:hidden text-white p-4 focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+
+            <ul id="mobile-menu-content" class="hidden absolute top-full left-0 w-full bg-orange-media flex-col md:static md:w-auto md:flex md:flex-row overflow-x-auto hide-scrollbar text-white font-bold uppercase text-[11px] md:text-sm tracking-wide border-t border-white/10 md:border-none">
+                <li class="whitespace-nowrap"><a href="index.html" class="px-4 py-4 block hover:bg-black/10 transition">Accueil</a></li>
+                <li class="whitespace-nowrap"><a href="politique.html" class="px-4 py-4 block hover:bg-black/10 transition">Politique</a></li>
+                <li class="whitespace-nowrap"><a href="justice.html" class="px-4 py-4 block hover:bg-black/10 transition">Justice</a></li>
+                <li class="whitespace-nowrap"><a href="economie.html" class="px-4 py-4 block hover:bg-black/10 transition">Économie</a></li>
+                <li class="whitespace-nowrap"><a href="culture.html" class="px-4 py-4 block hover:bg-black/10 transition">Culture</a></li>
+                <li class="whitespace-nowrap"><a href="faits_divers.html" class="px-4 py-4 block hover:bg-black/10 transition">Faits divers</a></li>
+                <li class="whitespace-nowrap"><a href="religion.html" class="px-4 py-4 block hover:bg-black/10 transition">Religion</a></li>
+                <li class="whitespace-nowrap"><a href="informateur.html" class="px-4 py-4 block hover:bg-black/10 transition text-yellow-300"><i class="fas fa-bullhorn mr-1"></i> Informateur</a></li>
+            </ul>
+
+            <div class="flex-1 max-w-[200px] md:max-w-xs relative my-2 pr-2">
+                <input type="text" id="search-input" placeholder="Rechercher..." class="w-full bg-white/20 text-white placeholder-white/70 border-none rounded-full py-1.5 px-4 text-xs focus:ring-2 focus:ring-white/50 outline-none transition">
+                <button id="search-btn" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white">
+                    <i class="fas fa-search text-xs"></i>
                 </button>
-
-                <ul class="hidden lg:flex items-center text-white font-bold uppercase text-sm tracking-wide h-full">
-                    <li><a href="index.html" class="px-4 py-5 block hover:bg-black/10">Accueil</a></li>
-                    <li><a href="politique.html" class="px-4 py-5 block hover:bg-black/10">Politique</a></li>
-                    <li><a href="justice.html" class="px-4 py-5 block hover:bg-black/10">Justice</a></li>
-                    <li><a href="economie.html" class="px-4 py-5 block hover:bg-black/10">Économie</a></li>
-                    <li><a href="sports.html" class="px-4 py-5 block hover:bg-black/10">Sports</a></li>
-                    <li><a href="culture.html" class="px-4 py-5 block hover:bg-black/10">Culture</a></li>
-                    <li><a href="faits_divers.html" class="px-4 py-5 block hover:bg-black/10">Société</a></li>
-                    <li><a href="religion.html" class="px-4 py-5 block hover:bg-black/10">Religion</a></li>
-                    <li><a href="informateur.html" class="px-4 py-5 block hover:bg-black/10 text-yellow-300 italic">Informateur</a></li>
-                </ul>
-
-                <div class="flex items-center h-9 bg-white rounded-full shadow-sm group w-full max-w-[200px] md:max-w-md ml-4">
-    <i class="fas fa-search ml-3 text-gray-400 text-xs"></i>
-    <input type="text" 
-           id="search-input" 
-           placeholder="Rechercher..." 
-           class="w-full bg-transparent px-2 text-[11px] outline-none text-gray-700">
-    <button id="search-btn" class="hidden md:block h-7 px-3 mr-1 bg-orange-media text-white text-[10px] font-black uppercase rounded-full">
-        OK
-    </button>
-</div>
-            </div>
-
-            <div id="mobile-menu-content" class="lg:hidden hidden bg-zinc-900 border-t border-white/10 overflow-hidden transition-all duration-300">
-                <ul class="flex flex-col text-white font-bold uppercase text-xs py-2">
-                    <li><a href="index.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Accueil</a></li>
-                    <li><a href="politique.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Politique</a></li>
-                    <li><a href="justice.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Justice</a></li>
-                    <li><a href="economie.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Économie</a></li>
-                    <li><a href="sports.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Sports</a></li>
-                    <li><a href="culture.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Culture</a></li>
-                    <li><a href="faits_divers.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Société</a></li>
-                    <li><a href="religion.html" class="px-6 py-4 block border-b border-white/5 hover:bg-orange-media">Religion</a></li>
-                    <li><a href="informateur.html" class="px-6 py-4 block text-yellow-300 italic">Devenir Informateur</a></li>
-                </ul>
             </div>
         </div>
     </nav>
-        </div>
-    </nav>
 
-    <main class="container mx-auto px-4 py-12 max-w-6xl">
-        <div class="text-center mb-12">
-            <h1 class="text-2xl md:text-3xl font-black uppercase mb-4 tracking-tight">
-                Résultats pour : <span id="search-query-display" class="text-orange-media italic">...</span>
-            </h1>
-            <div class="w-16 h-1 bg-gray-300 mx-auto"></div>
-        </div>
-
-        <div id="results-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="col-span-full text-center py-20">
-                <div class="animate-spin inline-block w-8 h-8 border-4 border-orange-media border-t-transparent rounded-full mb-4"></div>
-                <p class="text-gray-400 uppercase text-xs font-bold tracking-widest">Recherche dans la base de données...</p>
-            </div>
+    <main class="container mx-auto px-4 py-8 min-h-[60vh]">
+        <h1 class="text-2xl font-black uppercase border-l-4 border-orange-media pl-3 mb-8">
+            Résultats pour : <span id="search-query-display" class="text-orange-media">...</span>
+        </h1>
+        
+        <div id="search-results-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <p class="text-gray-500 italic">Recherche en cours dans la base de données...</p>
         </div>
     </main>
 
-    <footer class="bg-gray-900 text-white py-10 mt-20">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
-                <div>
-                    <img src="https://qkzzhjeeuierlqkqexrf.supabase.co/storage/v1/object/public/Logo/Nouveau%20projet.png" alt="Logo" class="h-16 mb-4 filter brightness-0 invert mx-auto md:mx-0">
-                    <p class="text-gray-400 text-sm italic">"Au coeur de l'infos"</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-orange-media mb-4 uppercase text-xs">Navigation</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="index.html" class="hover:text-white transition">Accueil</a></li>
-                        <li><a href="informateur.html" class="hover:text-white transition italic">Devenir Informateur</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-orange-media mb-4 uppercase text-xs">Contact</h4>
-                    <p class="text-sm text-gray-400">+243 855 780 151</p>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-[10px] text-gray-500 uppercase tracking-widest">
-                © 2026 Scoop243.net. Tous droits réservés.
-            </div>
+    <footer class="bg-gray-900 text-white py-10 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-[10px] text-gray-500 uppercase tracking-widest">&copy; 2026 scoop243.net - Tous droits réservés.</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
     <script src="config.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
-    <script src="config.js"></script>
-    
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const container = document.getElementById('results-container');
-            const queryDisplay = document.getElementById('search-query-display');
-            
-            const params = new URLSearchParams(window.location.search);
-            const query = params.get('q');
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. HORLOGE ET DATE ---
+            const updateClock = () => {
+                const now = new Date();
+                const clockEl = document.getElementById('live-clock');
+                const dateEl = document.getElementById('current-date');
+                
+                if (clockEl) clockEl.textContent = now.toLocaleTimeString('fr-FR');
+                if (dateEl) {
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    dateEl.textContent = now.toLocaleDateString('fr-FR', options);
+                }
+            };
+            setInterval(updateClock, 1000);
+            updateClock();
 
-            if (!query) {
-                container.innerHTML = `<p class="col-span-full text-center py-10 text-gray-500 uppercase text-xs font-bold tracking-widest">Veuillez entrer un terme de recherche.</p>`;
-                return;
+            // --- 2. MENU MOBILE ---
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const menuContent = document.getElementById('mobile-menu-content');
+            
+            if (menuBtn && menuContent) {
+                menuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    menuContent.classList.toggle('hidden');
+                    const icon = menuBtn.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-bars');
+                        icon.classList.toggle('fa-times');
+                    }
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!menuContent.contains(e.target) && !menuBtn.contains(e.target)) {
+                        menuContent.classList.add('hidden');
+                        const icon = menuBtn.querySelector('i');
+                        if (icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+                    }
+                });
             }
 
-            queryDisplay.innerText = `"${query}"`;
+            // --- 3. LOGIQUE DE RECHERCHE ---
+            const params = new URLSearchParams(window.location.search);
+            const query = params.get('q');
+            const displayEl = document.getElementById('search-query-display');
+            const container = document.getElementById('search-results-container');
 
-            try {
-                // Utilisation des colonnes exactes de votre base de données
-                const { data, error } = await supabaseClient
-                    .from('articles')
-                    .select('*')
-                    .or(`title.ilike.%${query}%,content.ilike.%${query}%`)
-                    .order('published_at', { ascending: false });
+            if (query) {
+                displayEl.textContent = `"${query}"`;
+                performSearch(query);
+            }
 
-                if (error) {
-                    console.error('Erreur Supabase détaillée:', error);
-                    throw error;
-                }
+            async function performSearch(q) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('articles')
+                        .select('*')
+                        .or(`title.ilike.%${q}%,content.ilike.%${q}%`)
+                        .order('created_at', { ascending: false });
 
-                if (!data || data.length === 0) {
-                    container.innerHTML = `
-                        <div class="col-span-full text-center py-20">
-                            <i class="fas fa-search-minus text-4xl text-gray-200 mb-4"></i>
-                            <p class="text-gray-500 uppercase text-xs font-bold tracking-widest">Aucun article trouvé pour "${query}"</p>
-                        </div>`;
-                    return;
-                }
+                    if (error) throw error;
 
-                container.innerHTML = data.map(article => {
-                    // On gère les noms de colonnes : image_url, categorie, published_at
-                    const imgUrl = article.image_url || article.image || 'https://via.placeholder.com/800x450?text=Scoop243';
-                    const dateAffiche = article.published_at ? new Date(article.published_at).toLocaleDateString('fr-FR') : '';
-                    
-                    return `
-                    <article class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all">
-                        <a href="article-details.html?id=${article.id}">
-                            <img src="${imgUrl}" class="w-full h-44 object-cover" alt="${article.title}">
+                    if (!data || data.length === 0) {
+                        container.innerHTML = `<p class="col-span-full text-center py-12 text-gray-400 font-medium italic">Aucun article ne correspond à votre recherche.</p>`;
+                        return;
+                    }
+
+                    container.innerHTML = data.map(art => `
+                        <article class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition">
                             <div class="p-5">
-                                <span class="text-[9px] bg-gray-100 text-orange-media px-2 py-0.5 rounded uppercase font-bold">
-                                    ${article.categorie || 'Info'}
-                                </span>
-                                <h2 class="text-lg font-bold mt-2 leading-tight hover:text-orange-media transition line-clamp-2">
-                                    ${article.title}
+                                <span class="text-[9px] uppercase font-bold text-orange-media">${art.category || 'Actualité'}</span>
+                                <h2 class="text-lg font-bold mt-2 leading-tight">
+                                    <a href="article-details.html?id=${art.id}" class="hover:text-orange-media">${art.title}</a>
                                 </h2>
-                                <p class="text-[10px] text-gray-400 mt-2 uppercase">
-                                    Par ${article.author || 'Rédaction'} • ${dateAffiche}
-                                </p>
+                                <p class="text-gray-600 text-xs mt-3 line-clamp-3">${art.content.substring(0, 100)}...</p>
                             </div>
-                        </a>
-                    </article>
-                    `;
-                }).join('');
+                        </article>
+                    `).join('');
 
-            } catch (err) {
-                console.error('Erreur de script:', err);
-                container.innerHTML = `<p class="col-span-full text-center text-red-500 font-bold uppercase text-xs tracking-widest">Erreur technique lors de la recherche.</p>`;
+                } catch (err) {
+                    container.innerHTML = `<p class="text-red-500">Erreur de connexion à la base de données.</p>`;
+                }
+            }
+
+            // --- 4. BARRE DE RECHERCHE (Header) ---
+            const searchInput = document.getElementById('search-input');
+            const searchBtn = document.getElementById('search-btn');
+            if (searchInput) {
+                const doSearch = () => {
+                    const val = searchInput.value.trim();
+                    if (val) window.location.href = `search-results.html?q=${encodeURIComponent(val)}`;
+                };
+                if (searchBtn) searchBtn.addEventListener('click', doSearch);
+                searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') doSearch(); });
             }
         });
     </script>
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const menuContent = document.getElementById('mobile-menu-content');
-
-        if (menuBtn && menuContent) {
-            menuBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Empêche la fermeture immédiate
-                menuContent.classList.toggle('hidden');
-                
-                // Change l'icône
-                const icon = menuBtn.querySelector('i');
-                if (icon) {
-                    icon.classList.toggle('fa-bars');
-                    icon.classList.toggle('fa-times');
-                }
-            });
-        }
-        
-        // Fermer le menu si on clique ailleurs sur la page
-        document.addEventListener('click', (e) => {
-            if (menuContent && !menuContent.contains(e.target) && !menuBtn.contains(e.target)) {
-                menuContent.classList.add('hidden');
-                const icon = menuBtn.querySelector('i');
-                if (icon) {
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-times');
-                }
-            }
-        });
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // --- 1. FONCTION HORLOGE ---
-        const updateClock = () => {
-            const now = new Date();
-            const dateEl = document.getElementById('live-date');
-            const clockEl = document.getElementById('live-clock');
-
-            if (dateEl) {
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                let dateStr = now.toLocaleDateString('fr-FR', options);
-                dateEl.textContent = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-            }
-            if (clockEl) {
-                const h = String(now.getHours()).padStart(2, '0');
-                const m = String(now.getMinutes()).padStart(2, '0');
-                const s = String(now.getSeconds()).padStart(2, '0');
-                clockEl.textContent = `${h}:${m}:${s}`;
-            }
-        };
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // --- 2. MENU MOBILE ---
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const menuContent = document.getElementById('mobile-menu-content');
-        if (menuBtn && menuContent) {
-            menuBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                menuContent.classList.toggle('hidden');
-                const icon = menuBtn.querySelector('i');
-                if (icon) {
-                    icon.classList.toggle('fa-bars');
-                    icon.classList.toggle('fa-times');
-                }
-            });
-        }
-
-        // --- 3. RECHERCHE ---
-        const searchInput = document.getElementById('search-input');
-        const searchBtn = document.getElementById('search-btn');
-        if (searchInput) {
-            const doSearch = () => {
-                const q = searchInput.value.trim();
-                if (q) window.location.href = `search.html?q=${encodeURIComponent(q)}`;
-            };
-            if (searchBtn) searchBtn.addEventListener('click', doSearch);
-            searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') doSearch(); });
-        }
-    });
-</script>
-// --- 2. MENU MOBILE ---
-const menuBtn = document.getElementById('mobile-menu-btn'); // Vérifié : correspond à votre HTML
-const menuContent = document.getElementById('mobile-menu-content'); // Vérifié : correspond à votre HTML
-
-if (menuBtn && menuContent) {
-    menuBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        // Alterne entre 'hidden' et 'block' pour afficher/cacher le menu
-        menuContent.classList.toggle('hidden');
-        
-        // Optionnel : Change l'icône de barre en croix
-        const icon = menuBtn.querySelector('i');
-        if (icon) {
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        }
-    });
-
-    // Ferme le menu si on clique n'importe où ailleurs sur la page
-    document.addEventListener('click', () => {
-        if (!menuContent.classList.contains('hidden')) {
-            menuContent.classList.add('hidden');
-            const icon = menuBtn.querySelector('i');
-            if (icon) {
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
-            }
-        }
-    });
-}
 </body>
 </html>
