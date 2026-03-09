@@ -72,12 +72,16 @@
                     <li><a href="informateur.html" class="px-4 py-5 block hover:bg-black/10 text-yellow-300 italic">Informateur</a></li>
                 </ul>
 
-                <div class="flex-grow max-w-[200px] md:max-w-md ml-4">
-                    <div class="relative flex items-center h-9 bg-white rounded-full shadow-sm group">
-                        <i class="fas fa-search ml-3 text-gray-400 text-xs"></i>
-                        <input type="text" id="search-input" placeholder="Rechercher..." class="w-full bg-transparent px-2 text-[11px] outline-none text-gray-700">
-                    </div>
-                </div>
+                <div class="flex items-center h-9 bg-white rounded-full shadow-sm group w-full max-w-[200px] md:max-w-md ml-4">
+    <i class="fas fa-search ml-3 text-gray-400 text-xs"></i>
+    <input type="text" 
+           id="search-input" 
+           placeholder="Rechercher..." 
+           class="w-full bg-transparent px-2 text-[11px] outline-none text-gray-700">
+    <button id="search-btn" class="hidden md:block h-7 px-3 mr-1 bg-orange-media text-white text-[10px] font-black uppercase rounded-full">
+        OK
+    </button>
+</div>
             </div>
 
             <div id="mobile-menu-content" class="lg:hidden hidden bg-zinc-900 border-t border-white/10 overflow-hidden transition-all duration-300">
