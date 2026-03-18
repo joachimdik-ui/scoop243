@@ -182,6 +182,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       // Charger les articles par catégorie (section homepage)
       await Promise.all([
         loadCategory('Politique', 'cat-politique', 4),
+        loadCategory('Justice', 'cat-justice', 4),
         loadCategory('Economie', 'cat-economie', 4),
         loadCategory('Sport', 'cat-sports', 4),
         loadCategory('Culture', 'cat-culture', 4),
@@ -287,4 +288,38 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+async function chargerArticlesParRubrique(nomCategorie, idElement) {
+  const container = document.getElementById(idElement);
+  if (!container) return;
+
+  try {
+    const { data, error } = await supabaseClient
+      .from('articles')
+      .select('id, title, published_at')
+      .eq('categorie', nomCategorie) // Assurez-vous que le nom de colonne est bien 'categorie'
+      .order('published_at', { ascending: false })
+      .limit(3);
+
+    if (error) throw error;
+
+    if (data && data.length > 0) {
+      container.innerHTML = ''; 
+      data.forEach(article => {
+        const date = new Date(article.published_at).toLocaleDateString('fr-FR');
+        container.innerHTML += `
+          <div class="border-b pb-2 last:border-0">
+            <a href="article-details.html?id=${article.id}" class="hover:text-orange-500 transition-colors font-medium">
+              ${article.title}
+            </a>
+            <div class="text-xs text-gray-400 mt-1">${date}</div>
+          </div>`;
+      });
+    } else {
+      container.innerHTML = '<p class="text-gray-400 italic">Aucun article.</p>';
+    }
+  } catch (err) {
+    console.error(`Erreur chargement ${nomCategorie}:`, err);
+    container.innerHTML = 'Erreur.';
+  }
 }
