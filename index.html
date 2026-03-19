@@ -29,6 +29,22 @@
         position: relative;
         overflow: hidden;
     }
+    @keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+    display: inline-block;
+    animation: scroll-left 25s linear infinite;
+    min-width: 100%;
+}
+
+/* Optionnel : s'arrête quand on passe la souris dessus pour lire plus facilement */
+.animate-scroll:hover {
+    animation-play-state: paused;
+}
+    
 </style>
     
 </head>
@@ -103,12 +119,16 @@
     </nav>
 
     <section class="container mx-auto px-2 md:px-4 mt-3">
-    <div class="bg-white border flex items-center shadow-sm text-sm md:text-lg font-bold">
-        <div class="bg-red-600 text-white px-4 py-3 font-black whitespace-nowrap">FLASH</div>
-        <marquee class="py-1 italic tracking-wide">
-            Urgent : Quelque chose de grand se prépare... scoop243.net sera bientôt votre source n°1 d'actualités. Ne le lisez pas seulement, vivez-le.
-        </marquee>
+    <div class="bg-white border flex items-center shadow-sm text-sm md:text-lg font-bold overflow-hidden">
+        <div class="bg-red-600 text-white px-4 py-3 font-black whitespace-nowrap z-10">FLASH</div>
+        <div class="flex-1 overflow-hidden">
+            <div class="animate-scroll py-1 italic tracking-wide whitespace-nowrap inline-block">
+                Urgent : Quelque chose de grand se prépare... scoop243.net sera bientôt votre source n°1 d'actualités. Ne le lisez pas seulement, vivez-le. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Urgent : Quelque chose de grand se prépare... scoop243.net sera bientôt votre source n°1 d'actualités. Ne le lisez pas seulement, vivez-le.
+            </div>
+        </div>
     </div>
+</section>
 </section>
 
     <main class="container mx-auto px-2 md:px-4 mt-6">
