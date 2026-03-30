@@ -118,18 +118,48 @@
         </div>
     </nav>
 
-    <section class="container mx-auto px-2 md:px-4 mt-3">
-    <div class="bg-white border flex items-center shadow-sm text-sm md:text-lg font-bold overflow-hidden">
-        <div class="bg-red-600 text-white px-4 py-3 font-black whitespace-nowrap z-10">FLASH</div>
-        <div class="flex-1 overflow-hidden">
-            <div class="animate-scroll py-1 italic tracking-wide whitespace-nowrap inline-block">
-                Urgent : Quelque chose de grand se prépare... scoop243.net sera bientôt votre source n°1 d'actualités. Ne le lisez pas seulement, vivez-le. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                Urgent : Quelque chose de grand se prépare... scoop243.net sera bientôt votre source n°1 d'actualités. Ne le lisez pas seulement, vivez-le.
-            </div>
+<div id="flash-container" class="hidden bg-red-600 text-white py-2 overflow-hidden relative">
+    <div class="container mx-auto px-4 flex items-center">
+        <span class="font-bold bg-white text-red-600 px-2 py-0.5 rounded text-xs uppercase mr-3 shrink-0">Flash</span>
+        <div class="flex-1 marquee overflow-hidden whitespace-nowrap">
+            <span id="flash-text" class="inline-block pl-full">Chargement de l'alerte...</span>
         </div>
     </div>
-</section>
-</section>
+</div>
+
+<style>
+    .marquee {
+        display: flex;
+        overflow: hidden;
+        user-select: none;
+        gap: 2rem;
+    }
+
+    .marquee span {
+        flex-shrink: 0;
+        display: inline-block;
+        min-width: 100%;
+        /* 30s = Vitesse lente et confortable */
+        /* linear = Vitesse constante */
+        animation: scroll-left 50s linear infinite;
+        padding-left: 100%; /* Petit décalage pour ne pas coller au bord au début */
+    }
+
+    @keyframes scroll-left {
+        0% {
+            transform: translateX(0%); /* Commence directement visible */
+        }
+        100% {
+            transform: translateX(-100%); /* Disparaît vers la gauche */
+        }
+    }
+
+    /* Optionnel : Arrête le défilement quand on survol avec la souris */
+    .marquee:hover span {
+        animation-play-state: paused;
+        cursor: pointer;
+    }
+</style>
 
     <main class="container mx-auto px-2 md:px-4 mt-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
@@ -449,5 +479,9 @@
             chargerDernierReportage();
         });
     </script>
+
+    <script src="config.js"></script>
+<script src="flash.js"></script> <script src="search.js"></script>
+
 </body>
 </html>
