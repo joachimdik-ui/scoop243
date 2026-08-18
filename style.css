@@ -1,0 +1,252 @@
+/* --- VARIABLES ET CONFIGURATION --- */
+:root {
+    --orange-primary: #F37021;    /* Orange signature */
+    --blue-accent: #0056b3;       /* Bleu pour certains liens/logos */
+    --gray-bg: #f4f4f4;           /* Fond de page léger */
+    --text-dark: #1a1a1a;         /* Texte principal */
+    --transition-fast: 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--gray-bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* --- HEADER & LOGO --- */
+.site-header {
+    background: #fff;
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo-container img {
+    max-height: 80px;
+    transition: transform var(--transition-fast);
+}
+
+.logo-container img:hover {
+    transform: scale(1.05);
+}
+
+/* --- NAVIGATION ORANGE --- */
+.main-nav {
+    background-color: var(--orange-primary);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li a {
+    display: block;
+    padding: 15px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: background var(--transition-fast);
+}
+
+.nav-links li a:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+/* --- SECTION "EN CE MOMENT" (TICKER) --- */
+.breaking-news {
+    background: #fff;
+    border-left: 5px solid #e11d48; /* Rouge alerte */
+    margin: 20px auto;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.breaking-title {
+    background: #e11d48;
+    color: #fff;
+    padding: 10px 20px;
+    font-weight: bold;
+    white-space: nowrap;
+    font-style: italic;
+}
+
+/* --- GRILLE D'ARTICLES --- */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2/3 pour les news, 1/3 sidebar */
+    gap: 30px;
+    padding: 20px;
+}
+
+/* Style des cartes d'articles */
+.article-card {
+    background: #fff;
+    margin-bottom: 25px;
+    overflow: hidden;
+    transition: box-shadow var(--transition-fast);
+    border-bottom: 3px solid transparent;
+}
+
+.article-card:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-bottom-color: var(--orange-primary);
+}
+
+.article-img-wrapper {
+    overflow: hidden;
+    position: relative;
+    height: 250px;
+}
+
+.article-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.article-card:hover .article-img-wrapper img {
+    transform: scale(1.1);
+}
+
+.category-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--orange-primary);
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.article-body {
+    padding: 15px;
+}
+
+.article-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+/* --- SIDEBAR (BARRE LATÉRALE) --- */
+.sidebar-section {
+    background: #fff;
+    margin-bottom: 30px;
+    border-top: 4px solid var(--orange-primary);
+    padding: 20px;
+}
+
+.section-title {
+    text-transform: uppercase;
+    font-weight: 900;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Style spécifique pour le bloc Justice/Top avec numéros */
+.top-news-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.top-number {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--orange-primary);
+    line-height: 1;
+}
+
+/* --- FOOTER --- */
+.site-footer {
+    background: #222;
+    color: #ccc;
+    padding: 60px 0 20px;
+    margin-top: 50px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.footer-title {
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    border: 1px solid #444;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    text-decoration: none;
+    color: #aaa;
+    transition: 0.3s;
+}
+
+.tag:hover {
+    background: var(--orange-primary);
+    color: #fff;
+    border-color: var(--orange-primary);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 992px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-links {
+        display: none; /* À remplacer par un menu burger en JS */
+    }
+}
